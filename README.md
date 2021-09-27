@@ -2,7 +2,7 @@
 
 Memolog is an in-memory logger, which extend any other logger.
 Designed to work with [Sentry](https://github.com/getsentry/sentry-ruby).
-It add `memolog` extra section to Sentry errors.
+It adds `memolog` extra section to Sentry errors.
 
 ## Installation
 
