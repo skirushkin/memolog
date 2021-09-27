@@ -16,7 +16,7 @@ jobs:
       with:
         ruby-version: 3
         bundler-cache: true
-    - name: Run rspec
+    - name: Run rubocop
       run: bundle exec rubocop
 
   rspec:
