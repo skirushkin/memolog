@@ -21,7 +21,9 @@ Gem::Specification.new do |spec|
   spec.files = `git ls-files -z`.split("\x0").reject { |f| f.include?("spec") }
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "logger", "~> 1.0"
+  spec.add_dependency "logger"
+  spec.add_dependency "securerandom"
+
   spec.add_development_dependency "pry"
   spec.add_development_dependency "rake"
   spec.add_development_dependency "rspec"

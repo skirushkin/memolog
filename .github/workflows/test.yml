@@ -1,11 +1,6 @@
-name: Ruby
+name: Test
 
-on:
-  push:
-    branches:
-      - master
-
-  pull_request:
+on: [push, pull_request]
 
 jobs:
   build:
@@ -13,8 +8,7 @@ jobs:
 
     strategy:
       matrix:
-        ruby:
-          - 3.0.1
+        ruby: [2.5, 2.6, 2.7, 3.0]
 
     steps:
     - uses: actions/checkout@v2
@@ -23,5 +17,5 @@ jobs:
       with:
         ruby-version: ${{ matrix.ruby }}
         bundler-cache: true
-    - name: Run the default task
+    - name: Run Rakefile tasks
       run: bundle exec rake
