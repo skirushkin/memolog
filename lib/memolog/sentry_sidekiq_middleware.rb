@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# :nocov:
 class Memolog::SentrySidekiqMiddleware
   def call(*)
     Memolog.run do
@@ -12,4 +11,3 @@ class Memolog::SentrySidekiqMiddleware
     end
   end
 end
-# :nocov:
