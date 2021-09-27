@@ -25,7 +25,10 @@ Gem::Specification.new do |spec|
   spec.add_dependency "securerandom"
 
   spec.add_development_dependency "pry"
+  spec.add_development_dependency "rails"
   spec.add_development_dependency "rake"
   spec.add_development_dependency "rspec"
   spec.add_development_dependency "rubocop-config-umbrellio"
+  spec.add_development_dependency "sentry-ruby"
+  spec.add_development_dependency "sidekiq"
 end

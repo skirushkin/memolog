@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "logger"
+require "securerandom"
 
 module Memolog
   extend self
@@ -12,8 +13,6 @@ module Memolog
   autoload :Middleware, "memolog/middleware"
   autoload :SentryScopeExtension, "memolog/sentry_scope_extension"
   autoload :SentrySidekiqMiddleware, "memolog/sentry_sidekiq_middleware"
-
-  require "memolog/engine" if defined?(Rails)
 
   attr_accessor :debug, :logdevs
 
@@ -55,8 +54,10 @@ module Memolog
     return if logdevs.empty?
 
     beginning = logdevs.last.string.length - config.log_size_limit
-    beginning = 0 if beginning.positive?
+    beginning = 0 if beginning.negative?
 
     logdevs.last.string.slice(beginning, config.log_size_limit)
   end
 end
+
+require "memolog/init"
