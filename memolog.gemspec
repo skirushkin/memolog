@@ -3,15 +3,20 @@
 require_relative "lib/memolog/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "memolog"
-  spec.version       = Memolog::VERSION
-  spec.authors       = ["Stepan Kirushkin"]
-  spec.email         = ["stepan.kirushkin@gmail.com"]
+  spec.name = "memolog"
+  spec.version = Memolog::VERSION
+  spec.authors = ["Stepan Kirushkin"]
+  spec.email = ["stepan.kirushkin@gmail.com"]
 
-  spec.summary       = "In-memory logger for exceptions."
-  spec.description   = "In-memory logger for exceptions."
-  spec.homepage      = "https://github.com/skirushkin/memolog"
-  spec.license       = "MIT"
+  spec.summary = "In-memory logger for exceptions."
+  spec.description = <<-EOF
+    Memolog is an in-memory logger, which extend any other logger.
+    Designed to work with Sentry.
+    It adds `memolog` extra section to Sentry errors.
+  EOF
+
+  spec.homepage = "https://github.com/skirushkin/memolog"
+  spec.license = "MIT"
   spec.required_ruby_version = ">= 2.5.0"
 
   spec.metadata["homepage_uri"] = spec.homepage
