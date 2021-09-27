@@ -9,11 +9,11 @@ Gem::Specification.new do |spec|
   spec.email = ["stepan.kirushkin@gmail.com"]
 
   spec.summary = "In-memory logger for exceptions."
-  spec.description = <<-EOF
+  spec.description = <<-TXT
     Memolog is an in-memory logger, which extend any other logger.
     Designed to work with Sentry.
     It adds `memolog` extra section to Sentry errors.
-  EOF
+  TXT
 
   spec.homepage = "https://github.com/skirushkin/memolog"
   spec.license = "MIT"
