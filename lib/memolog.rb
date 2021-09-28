@@ -59,6 +59,6 @@ module Memolog
     beginning = logdevs.last.string.length - config.log_size_limit
     beginning = 0 if beginning.negative?
 
-    @logdevs.last.string.slice(beginning, config.log_size_limit)
+    logdevs.last.string.slice(beginning, config.log_size_limit)
   end
 end
