@@ -20,6 +20,31 @@ Or install it yourself as:
 
     $ gem install memolog
 
+## Configuration
+
+Use this example during application initialization process (this example implement default values):
+
+```ruby
+Memolog.configure do |config|
+  config.debug = false
+  config.formatter = ::Memolog::Formatter.new
+  config.initializers = %i[rails sentry sidekiq]
+  config.log_size_limit = 50_000
+  config.sentry_key = :memolog
+  config.uuid_callable = -> { SecureRandom.uuid }
+end
+
+Memolog.init!
+```
+
+Available options are:
+- `debug` - set it to true if you need to leave Memolog.dump result outside `Memolog.run {}` block.
+- `formatter` - setup your own formatter.
+- `initializers` - define here what you want to initialize in `#init!` call.
+- `log_size_limit` - max log length in Sentry event.
+- `sentry_key` - key name in Sentry extra object.
+- `uuid_callable` - Memolog add unique value to logs, here you can redefine uuid generation.
+
 ## Usage
 
 Memolog has init code for Rails (Middleware), Sentry (Extension) and Sidekiq (Middleware).
