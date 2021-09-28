@@ -11,7 +11,7 @@ class Memolog::Init
 
   def init_rails!
     return unless defined?(Rails) && Memolog.config.initializers.include?(:rails)
-    require "memolog/railtie"
+    Rails.application.middleware.insert_before(0, Memolog::Middleware)
   end
 
   def init_sentry!
