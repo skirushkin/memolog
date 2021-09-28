@@ -1,17 +1,31 @@
 # frozen_string_literal: true
 
-if defined?(Rails::Railtie)
-  require "memolog/railtie"
-end
+class Memolog::Init
+  def call
+    init_rails!
+    init_sentry!
+    init_sidekiq!
+  end
 
-if defined?(Sentry::Scope)
-  Sentry::Scope.prepend(Memolog::SentryScopeExtension)
-end
+  private
 
-if defined?(Sidekiq)
-  Sidekiq.configure_server do |config|
-    config.server_middleware do |chain|
-      chain.prepend(Memolog::SentrySidekiqMiddleware)
+  def init_rails!
+    return unless defined?(Rails) && Memolog.config.initializers.include?(:rails)
+    require "memolog/railtie"
+  end
+
+  def init_sentry!
+    return unless defined?(Sentry::Scope) && Memolog.config.initializers.include?(:sentry)
+    Sentry::Scope.prepend(Memolog::SentryScopeExtension)
+  end
+
+  def init_sidekiq!
+    return unless defined?(Sidekiq) && Memolog.config.initializers.include?(:sidekiq)
+
+    Sidekiq.configure_server do |config|
+      config.server_middleware do |chain|
+        chain.prepend(Memolog::SentrySidekiqMiddleware)
+      end
     end
   end
 end
