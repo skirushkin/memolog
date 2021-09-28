@@ -31,11 +31,11 @@ describe Memolog do
     end
 
     it "saves log with debug option" do
-      Memolog.debug = true
+      Memolog.configure { |config| config.debug = true }
       Memolog.run { other_logger.info("it's alive") }
       expect(Memolog.dump).to include "it's alive"
 
-      Memolog.debug = false
+      Memolog.configure { |config| config.debug = false }
       Memolog.logdevs.pop
     end
   end
