@@ -47,8 +47,10 @@ Available options are:
 
 ## Usage
 
+Please call `Memolog.extend_logger(Rails.logger)` or any other logger you want to collect.
+
 Memolog has init code for Rails (Middleware), Sentry (Extension) and Sidekiq (Middleware).
-It implement all hacks on the load process.
+It implement all hacks on the `Memolog.init!` call.
 Also you can add `Memolog.run {}` around logs you want to collect and release it with `Memolog.dump`
 inside this block.
 
