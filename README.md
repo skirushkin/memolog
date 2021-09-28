@@ -48,6 +48,9 @@ Available options are:
 ## Usage
 
 Please call `Memolog.extend_logger(Rails.logger)` or any other logger you want to collect.
+After that when error occured you can check your Sentry report and see `memolog` section with all
+logs collected before error. Also there will be unique identifier to find logs behaviour on your
+server or log collection system.
 
 Memolog has init code for Rails (Middleware), Sentry (Extension) and Sidekiq (Middleware).
 It implement all hacks on the `Memolog.init!` call.
