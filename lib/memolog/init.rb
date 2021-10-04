@@ -11,6 +11,8 @@ class Memolog::Init
 
   def init_rails!
     return unless defined?(Rails) && Memolog.config.initializers.include?(:rails)
+    return if defined?(Sidekiq) && Sidekiq.server?
+
     Rails.application.middleware.insert_before(0, Memolog::Middleware)
   end
 
