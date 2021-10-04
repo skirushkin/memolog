@@ -1,3 +1,7 @@
+## 0.2.2
+
+- Do not init Rails middleware in Sidekiq server.
+
 ## 0.2.1
 
 - Better Rails middleware initialization.
