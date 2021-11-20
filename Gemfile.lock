@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    memolog (0.2.2)
+    memolog (0.2.3)
       logger (~> 1.4.3)
       securerandom (~> 0.1.0)
 
@@ -98,7 +98,7 @@ GEM
       activesupport (>= 5.0)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
-    logger (1.4.3)
+    logger (1.4.4)
     loofah (2.12.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -202,7 +202,7 @@ GEM
       rubocop (~> 1.0)
     ruby-progressbar (1.11.0)
     ruby2_keywords (0.0.5)
-    securerandom (0.1.0)
+    securerandom (0.1.1)
     sentry-ruby (4.7.3)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       faraday (>= 1.0)
