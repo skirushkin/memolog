@@ -6,7 +6,8 @@ class Memolog::SentrySidekiqMiddleware
       yield
     rescue => error
       memolog_dump = Memolog.dump
-      Sentry.set_extras(Memolog.config.sentry_key => memolog_dump) if memolog_dump
+      Sentry.set_extras(Memolog.config.sentry_key => memolog_dump) if memolog_dump.present?
+
       raise error
     end
   end

@@ -1,3 +1,7 @@
+## 0.2.3
+
+- Better Sentry monkey patch.
+
 ## 0.2.2
 
 - Do not init Rails middleware in Sidekiq server.

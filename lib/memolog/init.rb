@@ -10,19 +10,23 @@ class Memolog::Init
   private
 
   def init_rails!
-    return unless defined?(Rails) && Memolog.config.initializers.include?(:rails)
-    return if defined?(Sidekiq) && Sidekiq.server?
+    return unless Memolog.config.initializers.include?(:rails)
+    return unless Object.const_defined?("Rails")
+    return if Object.const_defined?("Sidekiq") && Sidekiq.server?
 
     Rails.application.middleware.insert_before(0, Memolog::Middleware)
   end
 
   def init_sentry!
-    return unless defined?(Sentry::Scope) && Memolog.config.initializers.include?(:sentry)
+    return unless Memolog.config.initializers.include?(:sentry)
+    return unless Object.const_defined?("Sentry::Scope")
+
     Sentry::Scope.prepend(Memolog::SentryScopeExtension)
   end
 
   def init_sidekiq!
-    return unless defined?(Sidekiq) && Memolog.config.initializers.include?(:sidekiq)
+    return unless Memolog.config.initializers.include?(:sidekiq)
+    return unless Object.const_defined?("Sidekiq")
 
     Sidekiq.configure_server do |config|
       config.server_middleware do |chain|
