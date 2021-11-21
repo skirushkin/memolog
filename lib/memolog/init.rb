@@ -26,12 +26,10 @@ class Memolog::Init
 
   def init_sidekiq!
     return unless Memolog.config.initializers.include?(:sidekiq)
-    return unless Object.const_defined?("Sidekiq")
+    return unless Object.const_defined?("Sentry::Sidekiq::SentryContextServerMiddleware")
 
-    Sidekiq.configure_server do |config|
-      config.server_middleware do |chain|
-        chain.prepend(Memolog::SentrySidekiqMiddleware)
-      end
-    end
+    Sentry::Sidekiq::SentryContextServerMiddleware.prepend(
+      Memolog::SentrySidekiqMiddlewareExtension,
+    )
   end
 end

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    memolog (0.2.3)
+    memolog (0.3.0)
       logger (~> 1.4.3)
       securerandom (~> 0.1.0)
 
@@ -210,6 +210,9 @@ GEM
     sentry-ruby-core (4.7.3)
       concurrent-ruby
       faraday
+    sentry-sidekiq (4.7.3)
+      sentry-ruby-core (~> 4.7.0)
+      sidekiq (>= 3.0)
     sidekiq (6.2.2)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
@@ -242,6 +245,7 @@ DEPENDENCIES
   rspec
   rubocop-config-umbrellio
   sentry-ruby
+  sentry-sidekiq
   sidekiq
 
 BUNDLED WITH
