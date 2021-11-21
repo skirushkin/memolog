@@ -11,7 +11,7 @@ require "memolog/formatter"
 require "memolog/init"
 require "memolog/middleware"
 require "memolog/sentry_scope_extension"
-require "memolog/sentry_sidekiq_middleware"
+require "memolog/sentry_sidekiq_middleware_extension"
 
 module Memolog
   extend self
@@ -59,6 +59,6 @@ module Memolog
     beginning = logdevs.last.string.length - config.log_size_limit
     beginning = 0 if beginning.negative?
 
-    logdevs.last.string.slice(beginning, config.log_size_limit)
+    logdevs.last.string.slice(beginning, config.log_size_limit).presence
   end
 end
