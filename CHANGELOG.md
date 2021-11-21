@@ -1,6 +1,9 @@
-## 0.2.3
+## 0.3.0
 
-- Better Sentry monkey patch.
+- Apply a prepend patch with `Sentry::Scope#apply_to_event` method.
+- Check constant definition via `Object.const_defined?`
+- Moving `Sentry::Sidekiq` scheme to monkey patch `Sentry::Sidekiq::SentryContextServerMiddleware`
+- More specs
 
 ## 0.2.2
 
