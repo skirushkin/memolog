@@ -2,14 +2,13 @@
 
 class Memolog::Init
   def call
-    init_rails!
-    init_sentry!
-    init_sidekiq!
+    init_rails_middleware!
+    init_sidekiq_middleware!
   end
 
   private
 
-  def init_rails!
+  def init_rails_middleware!
     return unless Memolog.config.initializers.include?(:rails)
     return unless Object.const_defined?("Rails")
     return if Object.const_defined?("Sidekiq") && Sidekiq.server?
@@ -17,14 +16,7 @@ class Memolog::Init
     Rails.application.middleware.insert_before(0, Memolog::RailsMiddleware)
   end
 
-  def init_sentry!
-    return unless Memolog.config.initializers.include?(:sentry)
-    return unless Object.const_defined?("Sentry")
-
-    Sentry.prepend(Memolog::SentryExtension)
-  end
-
-  def init_sidekiq!
+  def init_sidekiq_middleware!
     return unless Memolog.config.initializers.include?(:sidekiq)
     return unless Object.const_defined?("Sidekiq")
 

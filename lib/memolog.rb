@@ -16,10 +16,9 @@ require "memolog/sidekiq_middleware"
 module Memolog
   extend self
 
-  attr_accessor :config, :logdevs
+  attr_accessor :config
 
   @config = Memolog::Config.new
-  @logdevs = []
 
   def configure
     yield(config) if block_given?
@@ -40,6 +39,10 @@ module Memolog
 
   def logger
     Thread.current[:memolog_logger] ||= Logger.new(nil, formatter: config.formatter)
+  end
+
+  def logdevs
+    Thread.current[:memolog_logdevs] ||= []
   end
 
   def run

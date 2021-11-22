@@ -7,21 +7,18 @@ module Memolog::SentryExtension
 
   module ClassMethods
     def capture_exception(exception, **options, &block)
-      add_memolog_to_current_scope!
+      set_extras_memolog!
       super
     end
 
     def capture_message(message, **options, &block)
-      add_memolog_to_current_scope!
+      set_extras_memolog!
       super
     end
 
-    def add_memolog_to_current_scope!
-      dump = Memolog.dump
-      return unless dump
-
-      scope = get_current_scope
-      scope.set_extras(Memolog.config.sentry_key => dump) if scope # rubocop:disable Style/SafeNavigation
+    def set_extras_memolog!
+      return unless get_current_scope
+      set_extras(Memolog.config.sentry_key => Memolog.dump)
     end
   end
 end
