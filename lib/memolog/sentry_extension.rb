@@ -21,7 +21,7 @@ module Memolog::SentryExtension
       return unless dump
 
       scope = get_current_scope
-      scope.set_extras(Memolog.config.sentry_key => dump) if scope
+      scope.set_extras(Memolog.config.sentry_key => dump) if scope # rubocop:disable Style/SafeNavigation
     end
   end
 end
