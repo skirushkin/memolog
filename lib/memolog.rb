@@ -9,9 +9,9 @@ require "memolog/config"
 require "memolog/extension"
 require "memolog/formatter"
 require "memolog/init"
-require "memolog/middleware"
-require "memolog/sentry_scope_extension"
-require "memolog/sentry_sidekiq_middleware_extension"
+require "memolog/rails_middleware"
+require "memolog/sentry_extension"
+require "memolog/sidekiq_middleware"
 
 module Memolog
   extend self

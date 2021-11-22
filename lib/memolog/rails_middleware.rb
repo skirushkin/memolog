@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Memolog::Middleware
+class Memolog::RailsMiddleware
   def initialize(app)
     @app = app
   end

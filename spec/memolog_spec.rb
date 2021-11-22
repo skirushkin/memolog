@@ -57,7 +57,7 @@ describe Memolog do
   end
 end
 
-describe Memolog::Middleware do
+describe Memolog::RailsMiddleware do
   let(:app) { double(:app) }
   let(:env) { double(:env) }
 
@@ -80,7 +80,7 @@ describe Memolog::Init do
   describe "#init_rails!" do
     it "insert middleware to Rails.application" do
       make_rails_app { described_class.new.send(:init_rails!) }
-      expect(Rails.application.middleware[0]).to eq(Memolog::Middleware)
+      expect(Rails.application.middleware[0]).to eq(Memolog::RailsMiddleware)
     end
   end
 
@@ -89,8 +89,7 @@ describe Memolog::Init do
       described_class.new.send(:init_sentry!)
       expect(Memolog).to receive(:dump)
 
-      event = Sentry::Event.new(configuration: Sentry::Configuration.new)
-      Sentry::Scope.new.apply_to_event(event)
+      Sentry.capture_exception(StandardError.new)
     end
   end
 
@@ -103,7 +102,7 @@ describe Memolog::Init do
       described_class.new.send(:init_sidekiq!)
       expect(Memolog).to receive(:run)
 
-      Sentry::Sidekiq::SentryContextServerMiddleware.new.call(worker, job, queue)
+      Memolog::SidekiqMiddleware.new.call(worker, job, queue)
     end
   end
 end
