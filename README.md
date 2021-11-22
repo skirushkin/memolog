@@ -1,8 +1,7 @@
 # Memolog
 
 Memolog is an in-memory logger, which extend any other logger.
-Designed to work with [Sentry](https://github.com/getsentry/sentry-ruby).
-It adds `memolog` extra section to Sentry errors.
+Designed to work with [Sentry](https://github.com/getsentry/sentry-ruby) but it's not necessary.
 
 ## Installation
 
@@ -30,7 +29,6 @@ Memolog.configure do |config|
   config.formatter = ::Memolog::Formatter.new
   config.initializers = %i[rails sentry sidekiq]
   config.log_size_limit = 50_000
-  config.sentry_key = :memolog
   config.uuid_callable = -> { SecureRandom.uuid }
 end
 
@@ -42,7 +40,6 @@ Available options are:
 - `formatter` - setup your own formatter.
 - `initializers` - define here what you want to initialize in `#init!` call.
 - `log_size_limit` - max log length in Sentry event.
-- `sentry_key` - key name in Sentry extra object.
 - `uuid_callable` - Memolog add unique value to logs, here you can redefine uuid generation.
 
 ## Usage
