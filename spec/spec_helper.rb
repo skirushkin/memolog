@@ -3,8 +3,6 @@
 require "pry"
 require "rails"
 require "sidekiq"
-require "sentry-ruby"
-require "sentry-sidekiq"
 
 require "memolog"
 
