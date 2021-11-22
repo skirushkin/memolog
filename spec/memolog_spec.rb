@@ -4,17 +4,14 @@ describe Memolog do
   describe "#configure" do
     it "can change configuration" do
       described_class.configure do |config|
-        config.sentry_key = :sentry_key
         config.initializers = []
         config.log_size_limit = 1
       end
 
-      expect(described_class.config.sentry_key).to eq(:sentry_key)
       expect(described_class.config.initializers).to eq([])
       expect(described_class.config.log_size_limit).to eq(1)
 
       described_class.configure do |config|
-        config.sentry_key = :memolog
         config.initializers = %i[rails sentry sidekiq]
         config.log_size_limit = 50_000
       end
@@ -77,29 +74,20 @@ describe Memolog::RailsMiddleware do
 end
 
 describe Memolog::Init do
-  describe "#init_rails!" do
+  describe "#init_rails_middleware!" do
     it "insert middleware to Rails.application" do
-      make_rails_app { described_class.new.send(:init_rails!) }
+      make_rails_app { described_class.new.send(:init_rails_middleware!) }
       expect(Rails.application.middleware[0]).to eq(Memolog::RailsMiddleware)
     end
   end
 
-  describe "#init_sentry!" do
-    it "monkey patch Sentry::Scope" do
-      described_class.new.send(:init_sentry!)
-      expect(Memolog).to receive(:dump)
-
-      Sentry.capture_exception(StandardError.new)
-    end
-  end
-
-  describe "#init_sidekiq!" do
+  describe "#init_sidekiq_middleware!" do
     let(:worker) { double(:worker) }
     let(:job) { double(:job) }
     let(:queue) { double(:queue) }
 
-    it "monkey path Sentry::Sidekiq::SentryContextServerMiddleware" do
-      described_class.new.send(:init_sidekiq!)
+    it "insert middleware to Sidekiq" do
+      described_class.new.send(:init_sidekiq_middleware!)
       expect(Memolog).to receive(:run)
 
       Memolog::SidekiqMiddleware.new.call(worker, job, queue)
