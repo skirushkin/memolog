@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-class Memolog::Init
-  def call
+module Memolog::Init
+  extend self
+
+  def init_middlewares!
     init_rails_middleware!
     init_sidekiq_middleware!
   end
 
-  private
-
   def init_rails_middleware!
-    return unless Memolog.config.initializers.include?(:rails)
+    return unless Memolog.config.middlewares.include?(:rails)
     return unless Object.const_defined?("Rails")
     return if Object.const_defined?("Sidekiq") && Sidekiq.server?
 
@@ -17,7 +17,7 @@ class Memolog::Init
   end
 
   def init_sidekiq_middleware!
-    return unless Memolog.config.initializers.include?(:sidekiq)
+    return unless Memolog.config.middlewares.include?(:sidekiq)
     return unless Object.const_defined?("Sidekiq")
 
     Sidekiq.configure_server do |config|

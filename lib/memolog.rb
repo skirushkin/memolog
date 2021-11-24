@@ -24,8 +24,8 @@ module Memolog
     yield(config) if block_given?
   end
 
-  def init!
-    Memolog::Init.new.call
+  def init_middlewares!
+    Memolog::Init.init_middlewares!
   end
 
   def extend_logger(other_logger)

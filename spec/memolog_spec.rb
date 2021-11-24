@@ -4,15 +4,15 @@ describe Memolog do
   describe "#configure" do
     it "can change configuration" do
       described_class.configure do |config|
-        config.initializers = []
+        config.middlewares = []
         config.log_size_limit = 1
       end
 
-      expect(described_class.config.initializers).to eq([])
+      expect(described_class.config.middlewares).to eq([])
       expect(described_class.config.log_size_limit).to eq(1)
 
       described_class.configure do |config|
-        config.initializers = %i[rails sentry sidekiq]
+        config.middlewares = %i[rails sidekiq]
         config.log_size_limit = 50_000
       end
     end
@@ -76,7 +76,7 @@ end
 describe Memolog::Init do
   describe "#init_rails_middleware!" do
     it "insert middleware to Rails.application" do
-      make_rails_app { described_class.new.send(:init_rails_middleware!) }
+      make_rails_app { described_class.init_rails_middleware! }
       expect(Rails.application.middleware[0]).to eq(Memolog::RailsMiddleware)
     end
   end
@@ -87,7 +87,7 @@ describe Memolog::Init do
     let(:queue) { double(:queue) }
 
     it "insert middleware to Sidekiq" do
-      described_class.new.send(:init_sidekiq_middleware!)
+      described_class.init_sidekiq_middleware!
       expect(Memolog).to receive(:run)
 
       Memolog::SidekiqMiddleware.new.call(worker, job, queue)
