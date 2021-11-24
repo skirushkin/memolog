@@ -6,9 +6,9 @@ require "stringio"
 
 require "memolog/version"
 require "memolog/config"
-require "memolog/extension"
 require "memolog/formatter"
 require "memolog/init"
+require "memolog/logger_extension"
 require "memolog/rails_middleware"
 require "memolog/sentry_extension"
 require "memolog/sidekiq_middleware"
@@ -29,7 +29,7 @@ module Memolog
   end
 
   def extend_logger(other_logger)
-    other_logger.extend(Memolog::Extension)
+    other_logger.extend(Memolog::LoggerExtension)
     other_logger.formatter = config.formatter
   end
 
