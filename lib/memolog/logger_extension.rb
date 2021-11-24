@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Memolog::Extension
+module Memolog::LoggerExtension
   def add(*args, &block)
     Memolog.logger.log(*args, &block)
     super

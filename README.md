@@ -27,20 +27,27 @@ Use this example during application initialization process (this example impleme
 Memolog.configure do |config|
   config.debug = false
   config.formatter = ::Memolog::Formatter.new
-  config.initializers = %i[rails sidekiq]
+  config.middlewares = %i[rails sidekiq]
   config.log_size_limit = 50_000
   config.uuid_callable = -> { SecureRandom.uuid }
 end
 
-Memolog.init!
+Memolog.init_middlewares!
 ```
 
 Available options are:
 - `debug` - set it to true if you need to leave Memolog.dump result outside `Memolog.run {}` block.
 - `formatter` - setup your own formatter.
-- `initializers` - define here what you want to initialize in `#init!` call.
+- `middlewares` - define here what you want to initialize in `#init_middlewares!` call.
 - `log_size_limit` - max log length in `#dump`.
 - `uuid_callable` - Memolog add unique value to logs, here you can redefine uuid generation.
+
+If you want to apply Sentry monkey patch that call `Memolog.dump` before `Sentry.capture_exception`
+and `Sentry.capture_message` you can implement it via this code:
+
+```ruby
+Sentry.prepend(Memolog::SentryExtension)
+```
 
 ## Usage
 
