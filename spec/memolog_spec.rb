@@ -57,7 +57,7 @@ describe Memolog do
 
       described_class.configure do |config|
         config.formatter = -> (_severity, _datetime, _progname, msg) { "#{msg}\n" }
-        config.log_json = true
+        config.parse_json = true
       end
     end
 

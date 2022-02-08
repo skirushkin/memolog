@@ -57,7 +57,7 @@ module Memolog
 
     dump = logdevs.last.string.slice(beginning, config.log_size_limit).presence
 
-    config.log_json ? JSON.parse(dump) : dump
+    config.parse_json ? JSON.parse(dump) : dump
   rescue JSON::ParserError
     dump
   end
