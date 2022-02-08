@@ -1,7 +1,8 @@
 PATH
   remote: .
   specs:
-    memolog (0.3.5)
+    memolog (0.4.0)
+      json (~> 2)
       logger (~> 1.4.3)
       securerandom (~> 0.1.0)
 
@@ -87,6 +88,7 @@ GEM
     i18n (1.9.1)
       concurrent-ruby (~> 1.0)
     io-wait (0.2.1)
+    json (2.6.1)
     logger (1.4.4)
     loofah (2.13.0)
       crass (~> 1.0.2)
