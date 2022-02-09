@@ -74,6 +74,12 @@ describe Memolog do
         expect(described_class.dump).to include("not_json")
       end
     end
+
+    it "return nil if dump empty" do
+      described_class.run do
+        expect(Memolog.dump).to eq(nil)
+      end
+    end
   end
 end
 
