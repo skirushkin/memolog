@@ -3,10 +3,10 @@
 require "logger"
 require "securerandom"
 require "stringio"
+require "json"
 
 require "memolog/version"
 require "memolog/config"
-require "memolog/formatter"
 require "memolog/init"
 require "memolog/logger_extension"
 require "memolog/rails_middleware"
@@ -30,11 +30,6 @@ module Memolog
 
   def extend_logger(other_logger)
     other_logger.extend(Memolog::LoggerExtension)
-    other_logger.formatter = config.formatter
-  end
-
-  def uuid
-    Thread.current[:memolog_uuid]
   end
 
   def logger
@@ -46,8 +41,6 @@ module Memolog
   end
 
   def run
-    Thread.current[:memolog_uuid] = config.uuid_callable.call
-
     logdevs.push(StringIO.new)
     logger.instance_variable_set(:@logdev, logdevs.last)
 
@@ -62,6 +55,10 @@ module Memolog
     beginning = logdevs.last.string.length - config.log_size_limit
     beginning = 0 if beginning.negative?
 
-    logdevs.last.string.slice(beginning, config.log_size_limit).presence
+    dump = logdevs.last.string.slice(beginning, config.log_size_limit).presence
+
+    config.parse_json ? JSON.parse(dump) : dump
+  rescue JSON::ParserError
+    dump
   end
 end

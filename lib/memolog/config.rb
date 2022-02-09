@@ -4,14 +4,14 @@ Memolog::Config = Struct.new(
   :debug,
   :formatter,
   :middlewares,
+  :parse_json,
   :log_size_limit,
-  :uuid_callable,
 ) do
   def initialize
     self.debug = false
-    self.formatter = ::Memolog::Formatter.new
+    self.formatter = ::Logger::Formatter.new
     self.middlewares = %i[rails sidekiq]
+    self.parse_json = false
     self.log_size_limit = 50_000
-    self.uuid_callable = -> { SecureRandom.uuid }
   end
 end
