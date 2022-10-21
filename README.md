@@ -42,13 +42,6 @@ Available options are:
 - `log_json` - `#dump` will try to parse dump with `JSON.parse()`. Default is `false`
 - `log_size_limit` - max log length in `#dump`.
 
-If you want to apply Sentry monkey patch that call `Memolog.dump` before `Sentry.capture_exception`
-and `Sentry.capture_message` you can implement it via this code:
-
-```ruby
-Sentry.prepend(Memolog::SentryExtension)
-```
-
 ## Usage
 
 Please call `Memolog.extend_logger(Rails.logger)` or any other logger you want to collect.
