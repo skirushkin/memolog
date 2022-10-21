@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "logger"
-require "securerandom"
 require "stringio"
 require "json"
 

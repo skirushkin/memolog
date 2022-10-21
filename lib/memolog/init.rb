@@ -6,6 +6,7 @@ module Memolog::Init
   def init_middlewares!
     init_rails_middleware!
     init_sidekiq_middleware!
+    init_sentry!
   end
 
   def init_rails_middleware!
@@ -25,5 +26,11 @@ module Memolog::Init
         chain.prepend(Memolog::SidekiqMiddleware)
       end
     end
+  end
+
+  def init_sentry!
+    return unless Object.const_defined?(:Sentry)
+
+    Sentry.prepend(Memolog::SentryExtension)
   end
 end
