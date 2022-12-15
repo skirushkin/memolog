@@ -1,3 +1,22 @@
+## 0.4.8
+- Various gem updates
+- Version bump due to vulnerabilities
+
+## 0.4.7
+- Move Sentry to common init method
+- bundle update
+- Version bump
+
+## 0.4.6
+- Various gem updates
+- Version bump due to vulnerabilities
+
+## 0.4.0
+- Remove Memolog.uuid.
+- Deprecate formatter inheritance let user deside.
+- Add parse_json option to parse JSON dump.
+- Version bump
+
 ## 0.3.0
 
 - Apply a prepend patch with `Sentry::Scope#apply_to_event` method.
