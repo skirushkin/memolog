@@ -1,4 +1,5 @@
 ## 0.4.8
+- Update CHANGELOG
 - Various gem updates
 - Version bump due to vulnerabilities
 
