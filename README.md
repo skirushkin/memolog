@@ -26,7 +26,7 @@ Use this example during application initialization process (this example impleme
 ```ruby
 Memolog.configure do |config|
   config.debug = false
-  config.formatter = ::Logger::Formatter.new
+  config.formatter = Logger::Formatter.new
   config.middlewares = %i[rails sidekiq]
   config.log_json = false
   config.log_size_limit = 50_000

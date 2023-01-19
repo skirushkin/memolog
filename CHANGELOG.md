@@ -1,3 +1,8 @@
+## 0.4.9
+- Ruby 3.2 support
+- Various gem updates
+- Version bump due to vulnerabilities
+
 ## 0.4.8
 - Update CHANGELOG
 - Various gem updates
