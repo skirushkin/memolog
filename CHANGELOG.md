@@ -1,4 +1,5 @@
 ## 0.4.9
+- Ruby 3.2 support
 - Various gem updates
 - Version bump due to vulnerabilities
 
