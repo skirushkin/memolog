@@ -9,7 +9,7 @@ Memolog::Config = Struct.new(
 ) do
   def initialize
     self.debug = false
-    self.formatter = ::Logger::Formatter.new
+    self.formatter = Logger::Formatter.new
     self.middlewares = %i[rails sidekiq]
     self.parse_json = false
     self.log_size_limit = 50_000
