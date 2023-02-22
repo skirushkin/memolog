@@ -28,7 +28,6 @@ Memolog.configure do |config|
   config.debug = false
   config.formatter = Logger::Formatter.new
   config.middlewares = %i[rails sidekiq]
-  config.log_json = false
   config.log_size_limit = 50_000
 end
 
@@ -39,7 +38,6 @@ Available options are:
 - `debug` - set it to true if you need to leave Memolog.dump result outside `Memolog.run {}` block.
 - `formatter` - setup your own formatter.
 - `middlewares` - define here what you want to initialize in `#init_middlewares!` call.
-- `log_json` - `#dump` will try to parse dump with `JSON.parse()`. Default is `false`
 - `log_size_limit` - max log length in `#dump`.
 
 ## Usage

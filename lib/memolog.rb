@@ -48,7 +48,7 @@ module Memolog
     logdevs.pop unless config.debug
   end
 
-  def dump
+  def dump(parse_json: false)
     return if logdevs.empty?
 
     beginning = logdevs.last.string.length - config.log_size_limit
@@ -56,7 +56,7 @@ module Memolog
 
     dump = logdevs.last.string.slice(beginning, config.log_size_limit).presence
 
-    dump && config.parse_json ? JSON.parse(dump) : dump
+    dump && parse_json ? JSON.parse(dump) : dump
   rescue JSON::ParserError
     dump
   end
