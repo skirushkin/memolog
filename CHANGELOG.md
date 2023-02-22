@@ -1,3 +1,8 @@
+## 0.5.0
+- Let user decide when to parse json log or not. Default is false.
+- Sentry data parse json by default.
+- Various gem updates
+
 ## 0.4.9
 - Ruby 3.2 support
 - Various gem updates

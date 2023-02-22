@@ -18,7 +18,7 @@ module Memolog::SentryExtension
 
     def set_extras_memolog!
       return unless get_current_scope
-      set_extras(memolog: Memolog.dump)
+      set_extras(memolog: Memolog.dump(parse_json: true))
     end
   end
 end
