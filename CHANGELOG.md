@@ -1,4 +1,7 @@
 ## 0.5.0
+- Upgrade gems due to vulnerabilities.
+
+## 0.5.0
 - Let user decide when to parse json log or not. Default is false.
 - Sentry data parse json by default.
 - Various gem updates
