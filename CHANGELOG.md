@@ -1,5 +1,5 @@
-## 0.5.0
-- Upgrade gems due to vulnerabilities.
+## 0.5.1
+- Upgrade dependencies due to vulnerabilities.
 
 ## 0.5.0
 - Let user decide when to parse json log or not. Default is false.
