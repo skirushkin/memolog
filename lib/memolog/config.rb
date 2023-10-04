@@ -3,13 +3,15 @@
 Memolog::Config = Struct.new(
   :debug,
   :formatter,
-  :middlewares,
+  :isolation_level,
   :log_size_limit,
+  :middlewares,
 ) do
   def initialize
     self.debug = false
     self.formatter = Logger::Formatter.new
-    self.middlewares = %i[rails sidekiq]
+    self.isolation_level = :thread
     self.log_size_limit = 50_000
+    self.middlewares = %i[rails sidekiq]
   end
 end

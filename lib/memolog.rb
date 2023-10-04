@@ -31,14 +31,6 @@ module Memolog
     other_logger.extend(Memolog::LoggerExtension)
   end
 
-  def logger
-    Thread.current[:memolog_logger] ||= Logger.new(nil, formatter: config.formatter)
-  end
-
-  def logdevs
-    Thread.current[:memolog_logdevs] ||= []
-  end
-
   def run
     logdevs.push(StringIO.new)
     logger.instance_variable_set(:@logdev, logdevs.last)
@@ -46,6 +38,10 @@ module Memolog
     yield
   ensure
     logdevs.pop unless config.debug
+  end
+
+  def log(*args, &block)
+    logger.log(*args, &block)
   end
 
   def dump(parse_json: false)
@@ -59,5 +55,19 @@ module Memolog
     dump && parse_json ? JSON.parse(dump) : dump
   rescue JSON::ParserError
     dump
+  end
+
+  private
+
+  def logger
+    storage[:memolog_logger] ||= Logger.new(nil, formatter: config.formatter)
+  end
+
+  def logdevs
+    storage[:memolog_logdevs] ||= []
+  end
+
+  def storage
+    config.isolation_level == :fiber ? Fiber : Thread.current
   end
 end
