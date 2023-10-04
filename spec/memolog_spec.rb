@@ -2,7 +2,7 @@
 
 describe Memolog do
   describe "#configure" do
-    it "can change configuration" do
+    it "can change settings" do
       described_class.configure do |config|
         config.middlewares = []
         config.log_size_limit = 1
@@ -15,6 +15,20 @@ describe Memolog do
         config.middlewares = %i[rails sidekiq]
         config.log_size_limit = 50_000
       end
+    end
+
+    it "can chage storage" do
+      described_class.configure do |config|
+        config.isolation_level = :fiber
+      end
+
+      expect(described_class.send(:storage)).to eq(Fiber)
+
+      described_class.configure do |config|
+        config.isolation_level = :thread
+      end
+
+      expect(described_class.send(:storage)).to eq(Thread.current)
     end
   end
 
@@ -47,7 +61,7 @@ describe Memolog do
       expect(described_class.dump).to include("hello")
 
       described_class.configure { |config| config.debug = false }
-      described_class.logdevs.pop
+      described_class.send(:logdevs).pop
     end
   end
 
