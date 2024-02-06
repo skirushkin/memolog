@@ -34,3 +34,20 @@ jobs:
         bundler-cache: true
     - name: Run rspec
       run: bundle exec rspec
+
+  release:
+    runs-on: ubuntu-latest
+
+    environment: release
+
+    # Run on push to master branch
+    # if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Release Gem
+        uses: cadwallion/publish-rubygems-action@master
+        env:
+          GITHUB_TOKEN: ${{secrets.ACCOUNT_TOKEN}}
+          RUBYGEMS_API_KEY: ${{secrets.RUBYGEMS_API_KEY}}
