@@ -44,7 +44,7 @@ describe Memolog do
 
     it "supports #log" do
       described_class.run do
-        other_logger.log(0, "hello")
+        other_logger.add(0, "hello")
         expect(described_class.dump).to include("hello")
       end
     end
@@ -76,14 +76,14 @@ describe Memolog do
 
     it "try to parse json on dump" do
       described_class.run do
-        other_logger.log(0, JSON.dump(kek: 1))
+        other_logger.add(0, JSON.dump(kek: 1))
         expect(described_class.dump(parse_json: true)).to include("kek" => 1)
       end
     end
 
     it "dump text if JSON.parse fails" do
       described_class.run do
-        other_logger.log(0, "not_json")
+        other_logger.add(0, "not_json")
         expect(described_class.dump(parse_json: true)).to include("not_json")
       end
     end

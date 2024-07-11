@@ -40,7 +40,7 @@ module Memolog
     logdevs.pop unless config.debug
   end
 
-  def log(*args, &block)
+  def add(*args, &block)
     logger.log(*args, &block)
   end
 
