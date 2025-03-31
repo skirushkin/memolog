@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    memolog (0.5.6)
+    memolog (0.5.7)
       json
       logger
       securerandom
