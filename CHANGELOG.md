@@ -1,3 +1,6 @@
+## 0.5.7
+- Upgrade dependencies due to vulnerabilities.
+
 ## 0.5.1
 - Upgrade dependencies due to vulnerabilities.
 
